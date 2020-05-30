@@ -1,7 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-**Warning: tidyABS is in early development. Please use for experimentation only.**
-
 Overview
 --------
 
@@ -11,6 +9,11 @@ Installation
 ------------
 
 The `locatr` package is not available on CRAN. It can be installed from github with the following script:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ianmoran11/locatr")
+```
 
 Usage
 -----
@@ -65,7 +68,7 @@ locatr_example("worked-examples.xlsx") %>%
   plot_cells()
 ```
 
-![](README/README-unnamed-chunk-5-1.png)
+![](README/README-unnamed-chunk-6-1.png)
 
 Once the data cells are identified, we can add header information to the tidyxl data frame (including .direction, .header\_group and .value columns) using the `locate` function. This function requires direction and variable names. Again, `plot_cells` can be called to check that data cells have been identified correctly.
 
@@ -153,7 +156,7 @@ locatr_example("worked-examples.xlsx") %>%
   plot_cells()
 ```
 
-![](README/README-unnamed-chunk-10-1.png)
+![](README/README-unnamed-chunk-11-1.png)
 
 To browse different aspects of formatting on which to separate headers, type `fmt_` and tab
 
@@ -185,7 +188,7 @@ annotated_df <-
 annotated_df %>% plot_cells()
 ```
 
-![](README/README-unnamed-chunk-12-1.png)
+![](README/README-unnamed-chunk-13-1.png)
 
 ``` r
 

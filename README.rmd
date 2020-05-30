@@ -15,8 +15,6 @@ knitr::opts_chunk$set(
 ```
 
 
-**Warning: tidyABS is in early development. Please use for experimentation only.**
-
 ## Overview
 
 The `locatr` package An extension to unpivotr enabling a declarative approach to  converting data from complex or irregular layouts to a
@@ -25,7 +23,14 @@ The `locatr` package An extension to unpivotr enabling a declarative approach to
 ## Installation
 
 The `locatr` package is not available on CRAN. It can be installed from github with the following script:
+
  
+```{r eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("ianmoran11/locatr")
+```
+
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 # Load all packages 
 library(here)
