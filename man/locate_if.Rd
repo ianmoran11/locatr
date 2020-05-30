@@ -40,7 +40,7 @@ library(tidyverse)
 # Read in a formatted tidyxl data frame.
 
 xl_df <-
- unpivotr_example("worked-examples.xlsx") \%>\%
+ locatr_example("worked-examples.xlsx") \%>\%
  xlsx_cells_fmt(sheets = "pivot-hierarchy")
 
 # Add a column indicate the leveling of indenting for each cell and locate data cell.

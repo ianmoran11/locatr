@@ -21,7 +21,7 @@
 #' library(tidyverse)
 #'
 #' xl_df <-
-#' unpivotr_example("worked-examples.xlsx") %>%
+#' locatr_example("worked-examples.xlsx") %>%
 #'  xlsx_cells_fmt(sheets = "pivot-annotations")
 #'
 #' # Identfy which cells are data cells using `locate_data`
@@ -85,7 +85,7 @@ locate <- function(cells, direction, name, values = NULL, types = data_type,
 #' # Read in a formatted tidyxl data frame.
 #'
 #' xl_df <-
-#'  unpivotr_example("worked-examples.xlsx") %>%
+#'  locatr_example("worked-examples.xlsx") %>%
 #'  xlsx_cells_fmt(sheets = "pivot-hierarchy")
 #'
 #' # Add a column indicate the leveling of indenting for each cell and locate data cell.
@@ -169,7 +169,7 @@ locate_if <- function(cells, ..., direction, name, values = NULL, types = data_t
   headers <-
     cells_f %>%
     dplyr::filter(is_header) %>%
-    pack(types = !!types) %>%
+    unpivotr::pack(types = !!types) %>%
     dplyr::mutate(
       is_na = is.na(value),
       !!name := purrr::imap(

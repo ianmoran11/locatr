@@ -27,7 +27,7 @@
 #'
 #' # Read in tidyxl data frame
 #' xl_df <-
-#' unpivotr_example("worked-examples.xlsx") %>%
+#' locatr_example("worked-examples.xlsx") %>%
 #' xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
 #' append_fmt(fmt_alignment_indent)
 #'
@@ -95,7 +95,7 @@ locate_groups <-
 #'
 #' # Read in tidyxl data frame
 #' xl_df <-
-#'   unpivotr_example("anzsic.xlsx") %>%
+#'   locatr_example("anzsic.xlsx") %>%
 #'    xlsx_cells_fmt(sheets = "Classes") %>%
 #'    filter_fmt(row > 6) # Remove irrelevant rows
 #'
@@ -107,8 +107,8 @@ locate_groups <-
 #' # Add annotations for header cells that are numbers first, and then for header cells that are words.
 #'  xl_df <-
 #'   xl_df %>%
-#'    locate_groups_if(str_detect(character,"[0-9]") ,direction = "W", .hook_if = unpivotr::hook(TRUE)) %>%
-#'    locate_groups_if(str_detect(character,"[a-z]") ,direction = "W", .hook_if = unpivotr::hook(TRUE))
+#'    locate_groups_if(str_detect(character,"[0-9]") ,direction = "W", .hook_if = locatr::hook(TRUE)) %>%
+#'    locate_groups_if(str_detect(character,"[a-z]") ,direction = "W", .hook_if = locatr::hook(TRUE))
 
 locate_groups_if <-
   function(sheet= NULL,..., direction = "N", .groupings = groupings(fmt_alignment_indent),
@@ -222,7 +222,7 @@ locate_groups_if <-
 #'
 #' # Read in tidyxl data frame
 #' xl_df <-
-#' unpivotr_example("worked-examples.xlsx") %>%
+#' locatr_example("worked-examples.xlsx") %>%
 #' xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
 #' append_fmt(fmt_alignment_indent)
 #'
@@ -253,7 +253,7 @@ hook <- function(...) {
 #'
 #' # Read in tidyxl data frame
 #' xl_df <-
-#' unpivotr_example("worked-examples.xlsx") %>%
+#' locatr_example("worked-examples.xlsx") %>%
 #' xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
 #' append_fmt(fmt_alignment_indent)
 #'

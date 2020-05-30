@@ -34,7 +34,7 @@ For example, if "left" of "W" is used for the direction argument, cells furthest
 library(tidyverse)
 
 xl_df <-
-unpivotr_example("worked-examples.xlsx") \%>\%
+locatr_example("worked-examples.xlsx") \%>\%
  xlsx_cells_fmt(sheets = "pivot-annotations")
 
 # Identfy which cells are data cells using `locate_data`

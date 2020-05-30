@@ -3,7 +3,7 @@
 #' This is an internal function that:
 #'          1. Identifies which cells are likely to be headers
 #'          2. groups them according to their indenting, bold and italic formatting
-#'          3. Specifies the unpivotr function specifying the direction of the header w.r.t. table data
+#'          3. Specifies the locatr function specifying the direction of the header w.r.t. table data
 #' Behead multiple header groups
 #' @description
 #' Beheads multiple headers defined according to expressions in .groupings.

@@ -22,7 +22,7 @@ library(tidyverse)
 
 # Create annotated tidyxl data frame
 xl_df <-
-unpivotr_example("worked-examples.xlsx") \%>\%
+locatr_example("worked-examples.xlsx") \%>\%
 xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
   append_fmt(fmt_alignment_indent) \%>\%
   locate_data(data_type == "numeric") \%>\%

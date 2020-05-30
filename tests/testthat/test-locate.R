@@ -3,7 +3,7 @@ context("test-locate.R")
 test_that("locate_data() works", {
 
     locate_data_test_temp <-
-    unpivotr_example("worked-examples.xlsx") %>%
+    locatr_example("worked-examples.xlsx") %>%
     xlsx_cells_fmt(sheets = "pivot-annotations") %>%
     locate_data(data_type == "numeric") %>%
     attr("data_cells")
@@ -17,7 +17,7 @@ test_that("locate_data() works", {
 test_that("locate() works", {
 
   locate_test_temp <-
-    unpivotr_example("worked-examples.xlsx") %>%
+    locatr_example("worked-examples.xlsx") %>%
     xlsx_cells_fmt(sheets = "pivot-annotations") %>%
     locate_data(data_type == "numeric") %>%
     locate(direction = "WNW", name = subject_type) %>%
@@ -31,7 +31,7 @@ test_that("locate() works", {
 test_that("locate_groups() works", {
 
   locate_groups_test_temp <-
-    unpivotr_example("worked-examples.xlsx") %>%
+    locatr_example("worked-examples.xlsx") %>%
     xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
     append_fmt(fmt_alignment_indent) %>%
     locate_data(data_type == "numeric") %>%
@@ -49,7 +49,7 @@ test_that("locate_groups() works", {
 test_that("migrate() works", {
 
   migrate_test_temp <-
-    unpivotr_example("worked-examples.xlsx") %>%
+    locatr_example("worked-examples.xlsx") %>%
     xlsx_cells_fmt(sheets = "pivot-annotations") %>%
     locate_data(data_type == "numeric") %>%
     locate(direction = "WNW", name = subject_type) %>%

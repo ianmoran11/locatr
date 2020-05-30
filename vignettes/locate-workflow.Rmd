@@ -1,12 +1,12 @@
 ---
-title: "Tidying with unpivotr locate functions"
+title: "Tidying with locatr locate functions"
 author: "Ian Moran"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Tidying with unpivotr locate functions}
+  %\VignetteIndexEntry{Tidying with locatr locate functions}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -22,8 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(here)
 library(dplyr)
 library(stringr)
-library("unpivotr")
-devtools::load_all()
+library(locatr)
 ```
 
 The locate functions work much like `unpivotr::behead.` The key difference is that, rather than progressively removing headers, locate functions annotate the tidyxl data frame with .direction, .header_group and .value columns, leaving reshaping to a final function call. 
@@ -40,7 +39,7 @@ The first step is to locate the data cells with the `locate_data` function. Call
 
 
 ```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=6}
-unpivotr_example("worked-examples.xlsx") %>% 
+locatr_example("worked-examples.xlsx") %>% 
   xlsx_cells_fmt(sheets = "pivot-annotations") %>%
   locate_data(data_type == "numeric") %>% 
   attr("data_cells")
@@ -49,7 +48,7 @@ unpivotr_example("worked-examples.xlsx") %>%
 `plot_cells` produces a plot that indicates which cells are now labelled as data. 
 
 ```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
-unpivotr_example("worked-examples.xlsx") %>% 
+locatr_example("worked-examples.xlsx") %>% 
   xlsx_cells_fmt(sheets = "pivot-annotations") %>%
   locate_data(data_type == "numeric") %>% 
   plot_cells()
@@ -68,7 +67,7 @@ knitr::include_graphics("https://unpivotr.s3.amazonaws.com/unpivotr-locate-demo-
 And below is the code used in the gif. 
 
 ```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
-unpivotr_example("worked-examples.xlsx") %>%
+locatr::locatr_example("worked-examples.xlsx") %>%
   xlsx_cells_fmt(sheets = "pivot-annotations") %>%
   locate_data(data_type == "numeric") %>% 
   locate(direction = "WNW", name = subject_type) %>% 
@@ -90,7 +89,7 @@ knitr::include_graphics("https://unpivotr.s3.amazonaws.com/pivot-hierarchy.png")
 To deal with this we create a variable that represents the indenting of cells, and then use  `locate_if` to selectively associate cells with directions and header groups.  
 
 ```{r message=FALSE, warning=FALSE}
-unpivotr_example("worked-examples.xlsx") %>% 
+locatr_example("worked-examples.xlsx") %>% 
   xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
   append_fmt(fmt_alignment_indent) %>%
   locate_data(data_type == "numeric") %>%
@@ -107,7 +106,7 @@ We can deal with multiple headers differentiated by formatting more concisely us
 The `.hook_if` argument receives an expression with `hook` that indicates which header_groups are "WNW" rather than "N".  The `.hook_if_rev` argument will switch directions from "N" to "WSW". Importantly the `hook` expression is passed into `summarise` so it needs to reduce columns to a single boolean value. This is the reason for using `any` in the example below. 
 
 ```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
-unpivotr_example("worked-examples.xlsx") %>%
+locatr_example("worked-examples.xlsx") %>%
   xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
   append_fmt(fmt_alignment_indent) %>% 
   locate_data(data_type == "numeric") %>%
@@ -118,27 +117,13 @@ unpivotr_example("worked-examples.xlsx") %>%
   plot_cells()
 ```
 
-This concise sytax is now available for `behead` using `behead_groups`. See below the previous example reproduced using `behead_groups`.
-
-```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
-unpivotr_example("worked-examples.xlsx") %>%
-  xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
-  append_fmt(fmt_alignment_indent) %>% 
-  locate_data(data_type == "numeric") %>%
-  behead_groups(direction = "W",
-                .groupings = groupings(fmt_alignment_indent),
-                .hook_if =     hook(any(fmt_alignment_indent == 0))) %>% 
-  behead(direction = "N", name = student) %>% 
-  attr("data_cells") %>% select(.value:student)
-```
-
 To browse different aspects of formatting on which to separate headers, type `fmt_` and tab 
 
 ## A more complicated example: Tidying new residential construction data from the US Census Bureau
 
 Here's a more complicate table.  
 ```{r echo=FALSE,  message=FALSE, warning=FALSE, out.width = "800px"}
-knitr::include_graphics(unpivotr_example(path = "newconst.png"))
+knitr::include_graphics(locatr_example(path = "newconst.png"))
 ```
 
 We can tidy this table by:
@@ -150,7 +135,7 @@ We can tidy this table by:
 
 ```{r message=FALSE, warning=FALSE, fig.height=4, fig.width=8}
 annotated_df <- 
-  unpivotr_example("newresconst.xlsx") %>% 
+  locatr_example("newresconst.xlsx") %>% 
   xlsx_cells_fmt(sheets = "Table 1 - Permits") %>%
   append_fmt(fmt_font_bold) %>% 
   filter_fmt(row < min(row[str_detect(character,"RSE")],na.rm = TRUE)) %>% 

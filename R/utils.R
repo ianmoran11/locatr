@@ -277,12 +277,12 @@ get_header_index <- function(labels, regex_term = "^col_header") {
 
 
 #' Get path to example data
-#' Unpivotr comes bundled with some example files in its `inst/extdata`
+#' locatr comes bundled with some example files in its `inst/extdata`
 #' directory. This function makes them easy to access.
 #'
 #' @param path Name of file. If `NULL`, the example files will be listed.
 #' @export
-unpivotr_example <- function(path = NULL) {
+locatr_example <- function(path = NULL) {
   if (is.null(path)) {
     dir(system.file("extdata", package = "locatr")) %>% .[stringr::str_detect(., "xlsx$")]
   } else {
