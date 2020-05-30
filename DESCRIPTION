@@ -1,0 +1,53 @@
+Package: locatr
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person("Ian", "Moran", email = "ian.moran11@gmail.com", role = c("aut","cre")),
+    person("Duncan", "Garmonsway", email = "nacnudus@gmail.com", role = c("aut"))
+    )
+Description: An extension to unpivotr enabling a declarative approach to  converting data from complex or irregular layouts to a
+    columnar structure. 
+Depends:
+    R (>= 3.2.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    methods,
+    stringr,
+    rlang,
+    magrittr,
+    dplyr,
+    forcats,
+    purrr,
+    pillar,
+    tibble (>= 2.1.1),
+    cellranger,
+    xml2,
+    tidyselect,
+    vctrs,
+    tidyxl,
+    ggplot2,
+    tidyr,
+    unpivotr,
+    tidyselect,
+URL: https://github.com/ianmoran11/locatr
+BugReports: https://github.com/ianmoran11/locatr/issues
+RoxygenNote: 7.1.0
+Suggests:
+    knitr,
+    rmarkdown,
+    readr,
+    readxl,
+    htmltools,
+    rvest,
+    selectr,
+    DT,
+    testthat,
+    covr,
+    here,
+    devtools,
+    plotly
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
