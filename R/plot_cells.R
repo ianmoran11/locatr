@@ -64,22 +64,25 @@ plot_cells <- function(sheet, text = values, interactive = FALSE) {
 
 
   if (interactive == FALSE) {
+
     sheet_01 <-
-      sheet %>%
+        sheet %>%
       dplyr::left_join(direction_plot_noninteractive, by = ".direction") %>%
       dplyr::mutate(values = dplyr::coalesce(
         as.character(numeric), as.character(character),
-        as.character(logical), as.character(date)
-      ))
+        as.character(logical), as.character(date)))
+
     dplyr::bind_rows(
       dplyr::mutate(sheet_01, .arrow = NA, set = "Cell values"),
-      dplyr::mutate(sheet_01, {{ text }} := NA, set = "Directions")
-    ) %>%
-      ggplot2::ggplot(ggplot2::aes(x = col, y = row, fill = .header_label)) + ggplot2::geom_tile() +
-      ggplot2::geom_text(ggplot2::aes(label = stringr::str_sub({{ text }}, 1, 6))) +
-      ggplot2::geom_text(ggplot2::aes(label = ifelse(.rotate == 0, .arrow, NA))) +
-      ggplot2::geom_text(ggplot2::aes(label = ifelse(.rotate %in% 90, .arrow, NA)), angle = 90) +
-      ggplot2::geom_text(ggplot2::aes(label = ifelse(.rotate %in% -90, .arrow, NA)), angle = -90) +
+      dplyr::mutate(sheet_01, {{ text }} := NA, set = "Directions")) %>%
+      ggplot2::ggplot(ggplot2::aes(x = col, y = row, fill = .header_label)) +
+      ggplot2::geom_tile() +
+      ggplot2::geom_text(
+        ggplot2::aes(label = stringr::str_sub({{ text }}, 1, 6))) +
+      ggplot2::geom_text(
+        ggplot2::aes(label = ifelse(.rotate == 0, .arrow , ""))) +
+      ggplot2::geom_text(ggplot2::aes(label = ifelse(.rotate %in% 90, .arrow, "")), angle = 90) +
+      ggplot2::geom_text(ggplot2::aes(label = ifelse(.rotate %in% -90, .arrow, "")), angle = -90) +
       ggplot2::facet_wrap(~set, scales = "free") +
       ggplot2::labs(y = "Row", x = "Column") +
       ggplot2::scale_y_reverse() +
@@ -93,14 +96,15 @@ plot_cells <- function(sheet, text = values, interactive = FALSE) {
         as.character(numeric), as.character(character),
         as.character(logical), as.character(date)
       ))
+
     plot_object <-
       dplyr::bind_rows(
         dplyr::mutate(sheet_01, .arrow = NA, set = "Cell values"),
         dplyr::mutate(sheet_01, {{ text }} := NA, set = "Directions")
       ) %>%
       ggplot2::ggplot(ggplot2::aes(x = col, y = row, fill = .header_label)) + ggplot2::geom_tile() +
-      ggplot2::geom_text(ggplot2::aes(label = stringr::str_sub({{ text }}, 1, 5))) +
-      ggplot2::geom_text(ggplot2::aes(label = .arrow)) +
+      ggplot2::geom_text(ggplot2::aes(label = stringr::str_sub({{ text }}, 1, 5)) %>% ifelse(is.na(.),"")) +
+      ggplot2::geom_text(ggplot2::aes(label = .arrow %>% ifelse(is.na(.),""))) +
       ggplot2::facet_wrap(~set, scales = "free") +
       ggplot2::labs(y = "Row", x = "Column") +
       ggplot2::scale_y_reverse() +

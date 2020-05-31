@@ -260,7 +260,7 @@ get_header_index <- function(labels, regex_term = "^col_header") {
   } else {
     current_index_numbers %>%
       # Get highest index.
-      max(., na.rm = TRUE) %>%
+      suppressMessages(max(., na.rm = TRUE)) %>%
       # Deal with cases that have no index
       ifelse(is.finite(.), ., 0) %>%
       # increment on index.

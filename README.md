@@ -208,3 +208,5 @@ annotated_df %>% migrate()
 #> 10     9    11 456    South            "1 unit"         2018            
 #> # … with 146 more rows, and 1 more variable: W_header_label_02 <chr>
 ```
+
+*Note that older versions of dplyr require substituting `filter` for `filter_fmt`.*

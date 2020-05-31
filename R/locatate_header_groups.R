@@ -198,11 +198,13 @@ locate_groups_if <-
 
 
     min_header_index_temp <-
+      suppressWarnings(
       sheet$.header_label %>%
       stringr::str_remove_all(paste0(direction, "_header_label_")) %>%
       as.integer() %>%
       max(na.rm = T) %>%
       ifelse(!is.finite(.), 0, .)
+      )
 
     header_groups <- get_header_groups(sheet, direction, value_ref, formats,
       .groupings = groupings_temp,

@@ -215,14 +215,19 @@ get_header_groups <- function(sheet, direction, value_ref, formats,
 
   # Add information to output df ----
 
+
+
   header_df <-
+  suppressWarnings(
     header_df %>%
-    dplyr::mutate(data_summary = data %>%
-      purrr::map(~ .x %>% dplyr::summarise(
-        min_col = min(col, na.rm = T), max_col = max(col, na.rm = T),
-        min_row = min(row, na.rm = T), max_row = max(row, na.rm = T)
-      ))) %>%
+      dplyr::mutate(data_summary = data %>%
+                      purrr::map(~ .x %>% dplyr::summarise(
+                        min_col = min(col, na.rm = T), max_col = max(col, na.rm = T),
+                        min_row = min(row, na.rm = T), max_row = max(row, na.rm = T)
+                        ))
+                    ) %>%
     tidyr::unnest(data_summary)
+    )
 
   header_vars <- rlang::syms(header_df$header_label)
 
