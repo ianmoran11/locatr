@@ -15,6 +15,7 @@ mutate_fmt(df, ...)
 A wrapper for dplyr::mutate that retains formatting information
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
@@ -31,4 +32,5 @@ locatr_example("newresconst.xlsx") \%>\%
   locate_groups(direction = "N", header_fill = "style")
 
  annotated_df \%>\% plot_cells()
+ }
 }

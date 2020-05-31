@@ -3,7 +3,7 @@
 \name{fmt_font_family}
 \alias{fmt_font_family}
 \title{Add formatting information from the fmt_font_family format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_family formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_font_family(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_font_family(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_font_family format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_family formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

@@ -15,6 +15,7 @@ filter_fmt(df, ...)
 A wrapper for dplyr::filter that retains formatting information
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
@@ -31,4 +32,5 @@ annotated_df <-
   locate_groups(direction = "N", header_fill = "style")
 
  annotated_df \%>\% plot_cells()
+ }
 }

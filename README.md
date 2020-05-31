@@ -24,13 +24,13 @@ The locate functions work much like `unpivotr::behead.` The key difference is th
 
 Here's a minimal example involving a table with two row headers and two column headers.
 
-<img src="https://unpivotr.s3.amazonaws.com/pivot-annotations.png" width="800px" />
+<img src="https://locatr-package.s3-ap-southeast-2.amazonaws.com/pivot-example.png" width="800px" />
 
 The first step is to locate the data cells with the `locate_data` function. Calling `locate_data` and providing an expression that filters for data cells sends these cells to an attribute named `data_cells`.
 
 ``` r
 locatr_example("worked-examples.xlsx") %>% 
-  xlsx_cells_fmt(sheets = "pivot-annotations") %>%
+  xlsx_cells_fmt(sheets = "pivot-example") %>%
   locate_data(data_type == "numeric") %>% 
   attr("data_cells")
 #> # A tibble: 16 x 24
@@ -63,7 +63,7 @@ locatr_example("worked-examples.xlsx") %>%
 
 ``` r
 locatr_example("worked-examples.xlsx") %>% 
-  xlsx_cells_fmt(sheets = "pivot-annotations") %>%
+  xlsx_cells_fmt(sheets = "pivot-example") %>%
   locate_data(data_type == "numeric") %>% 
   plot_cells()
 ```
@@ -76,13 +76,13 @@ Once all header have directions and names, `migrate` reshapes the tidyxl data fr
 
 The gif below illustrate how direction informations is progressively added to the data frame.
 
-<img src="https://unpivotr.s3.amazonaws.com/unpivotr-locate-demo-02.gif" width="800px" />
+<img src="https://locatr-package.s3-ap-southeast-2.amazonaws.com/pivot-example.gif" width="800px" />
 
 And below is the code used in the gif.
 
 ``` r
 locatr::locatr_example("worked-examples.xlsx") %>%
-  xlsx_cells_fmt(sheets = "pivot-annotations") %>%
+  xlsx_cells_fmt(sheets = "pivot-example") %>%
   locate_data(data_type == "numeric") %>% 
   locate(direction = "WNW", name = subject_type) %>% 
   locate(direction = "W", name = subject) %>% 
@@ -90,37 +90,37 @@ locatr::locatr_example("worked-examples.xlsx") %>%
   locate(direction = "N", name = name) %>% 
   migrate()
 #> # A tibble: 16 x 7
-#>      row   col .value gender name     subject_type subject 
-#>    <int> <int> <chr>  <chr>  <chr>    <chr>        <chr>   
-#>  1     4     4 1      Female Matilda  Humanities   Classics
-#>  2     4     5 2      Female Olivia   Humanities   Classics
-#>  3     5     4 3      Female Matilda  Humanities   History 
-#>  4     5     5 4      Female Olivia   Humanities   History 
-#>  5     6     4 5      Female Matilda  Performance  Music   
-#>  6     6     5 6      Female Olivia   Performance  Music   
-#>  7     7     4 7      Female Matilda  Performance  Drama   
-#>  8     7     5 8      Female Olivia   Performance  Drama   
-#>  9     4     6 3      Male   Nicholas Humanities   Classics
-#> 10     4     7 0      Male   Paul     Humanities   Classics
-#> 11     5     6 5      Male   Nicholas Humanities   History 
-#> 12     5     7 1      Male   Paul     Humanities   History 
-#> 13     6     6 9      Male   Nicholas Performance  Music   
-#> 14     6     7 2      Male   Paul     Performance  Music   
-#> 15     7     6 12     Male   Nicholas Performance  Drama   
-#> 16     7     7 3      Male   Paul     Performance  Drama
+#>      row   col .value gender name    subject_type subject 
+#>    <int> <int> <chr>  <chr>  <chr>   <chr>        <chr>   
+#>  1     4     4 1      Year 1 Matilda Humanities   Classics
+#>  2     4     5 2      Year 1 Paul    Humanities   Classics
+#>  3     5     4 3      Year 1 Matilda Humanities   History 
+#>  4     5     5 4      Year 1 Paul    Humanities   History 
+#>  5     6     4 5      Year 1 Matilda Performance  Music   
+#>  6     6     5 6      Year 1 Paul    Performance  Music   
+#>  7     7     4 7      Year 1 Matilda Performance  Drama   
+#>  8     7     5 8      Year 1 Paul    Performance  Drama   
+#>  9     4     6 3      Year 2 Matilda Humanities   Classics
+#> 10     4     7 0      Year 2 Paul    Humanities   Classics
+#> 11     5     6 5      Year 2 Matilda Humanities   History 
+#> 12     5     7 1      Year 2 Paul    Humanities   History 
+#> 13     6     6 9      Year 2 Matilda Performance  Music   
+#> 14     6     7 2      Year 2 Paul    Performance  Music   
+#> 15     7     6 12     Year 2 Matilda Performance  Drama   
+#> 16     7     7 3      Year 2 Paul    Performance  Drama
 ```
 
 ### Conditional headers : `locate_if`
 
 Sometimes not all headers in the same column or row belong to the same group. For example, in the table below, the row headers in column B represent a mix of subject type and subject name.
 
-<img src="https://unpivotr.s3.amazonaws.com/pivot-hierarchy.png" width="800px" />
+<img src="https://locatr-package.s3-ap-southeast-2.amazonaws.com/pivot-indent.png" width="800px" />
 
 To deal with this we create a variable that represents the indenting of cells, and then use `locate_if` to selectively associate cells with directions and header groups.
 
 ``` r
 locatr_example("worked-examples.xlsx") %>% 
-  xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
+  xlsx_cells_fmt(sheets = "pivot-indent") %>%
   append_fmt(fmt_alignment_indent) %>%
   locate_data(data_type == "numeric") %>%
   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) %>% 
@@ -128,16 +128,16 @@ locatr_example("worked-examples.xlsx") %>%
   locate(direction = "N", name = student) %>% 
   migrate()
 #> # A tibble: 8 x 6
-#>     row   col .value student  subject_type subject 
-#>   <int> <int> <chr>  <chr>    <chr>        <chr>   
-#> 1     4     3 1      Matilda  Humanities   Classics
-#> 2     4     4 3      Nicholas Humanities   Classics
-#> 3     5     3 3      Matilda  Humanities   History 
-#> 4     5     4 5      Nicholas Humanities   History 
-#> 5     7     3 5      Matilda  Performance  Music   
-#> 6     7     4 9      Nicholas Performance  Music   
-#> 7     8     3 7      Matilda  Performance  Drama   
-#> 8     8     4 12     Nicholas Performance  Drama
+#>     row   col .value student subject_type subject 
+#>   <int> <int> <chr>  <chr>   <chr>        <chr>   
+#> 1     4     3 1      Matilda Humanities   Classics
+#> 2     4     4 2      Paul    Humanities   Classics
+#> 3     5     3 3      Matilda Humanities   History 
+#> 4     5     4 4      Paul    Humanities   History 
+#> 5     7     3 5      Matilda Performance  Music   
+#> 6     7     4 6      Paul    Performance  Music   
+#> 7     8     3 7      Matilda Performance  Drama   
+#> 8     8     4 8      Paul    Performance  Drama
 ```
 
 ### A more concise syntax : `locate_groups`
@@ -146,7 +146,7 @@ We can deal with multiple headers differentiated by formatting more concisely us
 
 ``` r
 locatr_example("worked-examples.xlsx") %>%
-  xlsx_cells_fmt(sheets = "pivot-hierarchy") %>%
+  xlsx_cells_fmt(sheets =  "pivot-indent") %>%
   append_fmt(fmt_alignment_indent) %>% 
   locate_data(data_type == "numeric") %>%
   locate_groups(direction = "W",
@@ -164,7 +164,7 @@ A more complicated example: Tidying new residential construction data from the U
 -----------------------------------------------------------------------------------------------
 
 Here's a more complicate table.
-<img src="/home/ian/main/projects/locatr/inst/extdata/newconst.png" width="800px" />
+<img src="https://locatr-package.s3-ap-southeast-2.amazonaws.com/newconst.png" width="800px" />
 
 We can tidy this table by:
 
@@ -178,7 +178,7 @@ annotated_df <-
   locatr_example("newresconst.xlsx") %>% 
   xlsx_cells_fmt(sheets = "Table 1 - Permits") %>%
   append_fmt(fmt_font_bold) %>% 
-  filter_fmt(row < min(row[str_detect(character,"RSE")],na.rm = TRUE)) %>% 
+  filter(row < min(row[str_detect(character,"RSE")],na.rm = TRUE)) %>% 
   locate_data(data_type == "numeric" & col > 1) %>%
   locate_groups(direction = "W", 
                 .groupings = groupings(is.na(numeric)), 

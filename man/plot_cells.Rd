@@ -14,23 +14,27 @@ plot_cells(sheet, text = values, interactive = FALSE)
 \item{interactive}{TRUE produces an interactive plotly visualisation.}
 }
 \description{
-This function plots the excel sheet, highlighting the relationship between headers and table values.
+This function plots the excel sheet, highlighting the relationship between headers and table
+values.
 }
 \examples{
-
+\dontrun{
 library(tidyverse)
 
 # Create annotated tidyxl data frame
 xl_df <-
-locatr_example("worked-examples.xlsx") \%>\%
-xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
+  locatr_example("worked-examples.xlsx") \%>\%
+  xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
   append_fmt(fmt_alignment_indent) \%>\%
   locate_data(data_type == "numeric") \%>\%
-  locate_groups(direction = "W",
-                .groupings = groupings(fmt_alignment_indent),
-                .hook_if =     hook(any(fmt_alignment_indent == 0))) \%>\%
+  locate_groups(
+    direction = "W",
+    .groupings = groupings(fmt_alignment_indent),
+    .hook_if = hook(any(fmt_alignment_indent == 0))
+  ) \%>\%
   locate(direction = "N", name = student)
 
 # Plot direction annotations
- xl_df \%>\% plot_cells()
+xl_df \%>\% plot_cells()
+}
 }

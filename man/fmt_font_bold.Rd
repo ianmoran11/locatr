@@ -3,7 +3,7 @@
 \name{fmt_font_bold}
 \alias{fmt_font_bold}
 \title{Add formatting information from the fmt_font_bold format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_bold formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_font_bold(format_id_vec = local_format_id, sheet_formats = formats)
 }
@@ -14,5 +14,5 @@ fmt_font_bold(format_id_vec = local_format_id, sheet_formats = formats)
 }
 \description{
 Add formatting information from the fmt_font_bold format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_bold formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

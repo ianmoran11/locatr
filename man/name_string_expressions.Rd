@@ -8,6 +8,8 @@ name_string_expressions(x, prefix)
 }
 \arguments{
 \item{x}{a vector of strings representing spreadsheet ranges}
+
+\item{prefix}{variable prefix}
 }
 \description{
 This is an internal function that adds a prefixed name to a quosure so that variables added to a data frame using this quosure have a predictable name.

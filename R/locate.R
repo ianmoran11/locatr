@@ -1,11 +1,14 @@
 #' Add direction annations to tidyxl data frame
 #'
 #' @description
-#' This function adds direction annations to tidyxl data frame. The resulting data frame will contain the following columns: `.value`, `.direction`, and `.header_label`.
-#' These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by `migrate`.
+#' This function adds direction annations to tidyxl data frame. The resulting data frame will
+#' contain the following columns: `.value`, `.direction`, and `.header_label`.
+#' These columns indicate the value, direction and name of the header columns that will be
+#' produced in the tidy data frame produced by `migrate`.
 #'
 #' The header cells for which annotations are the outermost.
-#' For example, if "left" of "W" is used for the direction argument, cells furthest to the left in your spreadsheet will have location information added.
+#' For example, if "left" of "W" is used for the direction argument, cells furthest to the left
+#' in your spreadsheet will have location information added.
 #'
 #'
 #' @param cells  a tidyxl data frame
@@ -17,6 +20,7 @@
 #' @param drop_na  drop_na
 #' @export
 #' @examples
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -28,7 +32,8 @@
 #'
 #'  xl_df <- xl_df %>% locate_data(data_type == "numeric")
 #'
-#'  # Identify header cells, indicating their direction with respect to the data and a name for their column in the final tidy data frame.
+#'  # Identify header cells, indicating their direction with respect to the data and a name for
+#'  their column in the final tidy data frame.
 #'  xl_df <-
 #'   xl_df %>%
 #'    locate(direction = "WNW", name = subject_type) %>%
@@ -36,9 +41,10 @@
 #'    locate(direction = "NNW", name = gender) %>%
 #'    locate(direction = "N", name = name)
 #'
-#'  # Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+#'  # Use `migrate` to reshape the data frame such that each data cells has its own row and each
+#'  header variable has its own column.
 #'  xl_df %>% migrate()
-#'
+#' }
 
 
 locate <- function(cells, direction, name, values = NULL, types = data_type,
@@ -61,11 +67,14 @@ locate <- function(cells, direction, name, values = NULL, types = data_type,
 #' Conditionally adds direction annotations to tidyxl data frame
 #'
 #' @description
-#' This function conditionally adds direction annations to tidyxl data frame. The resulting data frame will contain the following columns: `.value`, `.direction`, and `.header_label`.
-#' These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by `migrate`.
+#' This function conditionally adds direction annations to tidyxl data frame. The resulting data
+#' frame will contain the following columns: `.value`, `.direction`, and `.header_label`.
+#' These columns indicate the value, direction and name of the header columns that will be produced
+#'  in the tidy data frame produced by `migrate`.
 #'
 #' The header cells for which annotations are the outermost.
-#' For example, if "left" of "W" is used for the direction argument, cells furthest to the left in your spreadsheet will have location information added.
+#' For example, if "left" of "W" is used for the direction argument, cells furthest to the left in
+#'  your spreadsheet will have location information added.
 #'
 #' The `...` arguments take explressions that identify which cells we have annotations added.
 #'
@@ -79,6 +88,7 @@ locate <- function(cells, direction, name, values = NULL, types = data_type,
 #' @param ... expression to filter for headers
 #' @export
 #' @examples
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -95,15 +105,18 @@ locate <- function(cells, direction, name, values = NULL, types = data_type,
 #'   locate_data(data_type == "numeric")
 #'
 #'
-#' # Add annotations for header cells. First for header cells to the left of the table with no indenting, and then for cells for one level of indenting.
+#' # Add annotations for header cells. First for header cells to the left of the table with no
+#' indenting, and then for cells for one level of indenting.
 #' xl_df <-
 #'  xl_df %>%
 #'   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) %>%
 #'   locate_if(fmt_alignment_indent == 1, direction = "W", name = subject) %>%
 #'   locate(direction = "N", name = student)
 #'
-#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each
+#' header variable has its own column.
 #'  xl_df %>% migrate()
+#'  }
 
 
 locate_if <- function(cells, ..., direction, name, values = NULL, types = data_type,
@@ -193,7 +206,8 @@ locate_if <- function(cells, ..., direction, name, values = NULL, types = data_t
     dplyr::mutate(.direction = direction)
 
   # Join headers to original cells
-  cells <- cells %>% dplyr::left_join(headers_reshaped, by = c("row", "col"), suffix = c(".o", ".n"))
+  cells <- cells %>% dplyr::left_join(headers_reshaped, by = c("row", "col"),
+                                      suffix = c(".o", ".n"))
 
 
   cells %>% dplyr::select(dplyr::matches("^\\."))
@@ -204,7 +218,8 @@ locate_if <- function(cells, ..., direction, name, values = NULL, types = data_t
     dplyr::mutate(.header_label = dplyr::coalesce(.header_label.n, .header_label.o)) %>%
     dplyr::mutate(.direction = dplyr::coalesce(.direction.n, .direction.o)) %>%
     dplyr::mutate(.value = dplyr::coalesce(.value.n, .value.o)) %>%
-    dplyr::select(-.value.n, -.value.o, -.direction.n, -.direction.o, -.header_label.n, -.header_label.o)
+    dplyr::select(-.value.n, -.value.o, -.direction.n, -.direction.o, -.header_label.n,
+                  -.header_label.o)
 
 
   cells <-

@@ -33,15 +33,14 @@ paste3 <- function(..., sep = ", ") {
 #' @param formats the formats of the workbook associated with the tidyxl data frame.
 
 fill_blanks_in_row_headers <- function(header_df, header_fill = c("style", "local_format_id", "borders"), formats) {
-
-  header_fill = match.arg(header_fill)
+  header_fill <- match.arg(header_fill)
 
   if (header_fill == "style") {
     continue <- TRUE
 
     while (continue) {
       sheet_original <- header_df
-      header_df <- header_df %>% unmerge_row_cells(strict_merging = FALSE,merge_var = "style_format")
+      header_df <- header_df %>% unmerge_row_cells(strict_merging = FALSE, merge_var = "style_format")
 
       continue <- !identical(sheet_original, header_df)
     }
@@ -52,7 +51,7 @@ fill_blanks_in_row_headers <- function(header_df, header_fill = c("style", "loca
 
     while (continue) {
       sheet_original <- header_df
-      header_df <- header_df %>% unmerge_row_cells(strict_merging = TRUE,merge_var = "local_format_id")
+      header_df <- header_df %>% unmerge_row_cells(strict_merging = TRUE, merge_var = "local_format_id")
 
       continue <- !identical(sheet_original, header_df)
     }
@@ -87,8 +86,7 @@ fill_blanks_in_row_headers <- function(header_df, header_fill = c("style", "loca
 #' @param formats the formats of the workbook associated with the tidyxl data frame.
 
 fill_blanks_in_col_headers <- function(header_df, header_fill = c("style", "local_format_id", "borders"), formats) {
-
-  header_fill = match.arg(header_fill)
+  header_fill <- match.arg(header_fill)
 
 
   if (header_fill == "style") {
@@ -119,7 +117,7 @@ fill_blanks_in_col_headers <- function(header_df, header_fill = c("style", "loca
       dplyr::group_by(h_border_group) %>%
       dplyr::select(row, col, h_border_group, character) %>%
       dplyr::mutate(value = ifelse(is.na(character), paste3(character, collapse = " _ ") %>%
-                                     stringr::str_remove_all(" _ "), character)) %>%
+        stringr::str_remove_all(" _ "), character)) %>%
       dplyr::ungroup() %>%
       dplyr::arrange(h_border_group, row, col) %>%
       dplyr::select(row, col, character = value)
@@ -145,8 +143,7 @@ fill_blanks_in_col_headers <- function(header_df, header_fill = c("style", "loca
 #' @param direction the direction in which headers are filled.
 
 fill_blanks_in_headers <- function(header_df, header_fill = c("style", "local_format_id", "borders"), formats, direction) {
-
-  header_fill = match.arg(header_fill)
+  header_fill <- match.arg(header_fill)
 
   if (direction %in% c("N", "S", "up", "down")) {
     header_df <- fill_blanks_in_col_headers(header_df, header_fill, formats)
@@ -188,7 +185,7 @@ add_variable_if_missing <- function(sheet, var) {
   if (!var %in% names(sheet)) {
     var_sym <- rlang::sym(var)
 
-    sheet <- dplyr::bind_rows(sheet , tibble::tibble(!!var_sym := character()))
+    sheet <- dplyr::bind_rows(sheet, tibble::tibble(!!var_sym := character()))
   }
 
   sheet
@@ -216,10 +213,10 @@ string_range_to_filter_vars <- function(sheet, table_range) {
   data_sheet <-
     sheet %>%
     dplyr::mutate(!!string_filter_name :=
-                    row >= table_range_df$min_row[1] &
-                    row <= table_range_df$max_row[1] &
-                    col >= table_range_df$min_col[1] &
-                    col <= table_range_df$max_col[1])
+      row >= table_range_df$min_row[1] &
+        row <= table_range_df$max_row[1] &
+        col >= table_range_df$min_col[1] &
+        col <= table_range_df$max_col[1])
 }
 
 #' Get the corner references of a tidyxl data frame.
@@ -229,11 +226,11 @@ string_range_to_filter_vars <- function(sheet, table_range) {
 #' @param sheet a tidyxl data frame.
 
 get_corner_cell_refs <- function(sheet) {
-
-  list(min_row = min(sheet$row),
-       max_row = max(sheet$row),
-       min_col = min(sheet$col),
-       max_col = max(sheet$col)
+  list(
+    min_row = min(sheet$row),
+    max_row = max(sheet$row),
+    min_col = min(sheet$col),
+    max_col = max(sheet$col)
   )
 }
 
@@ -249,21 +246,18 @@ get_corner_cell_refs <- function(sheet) {
 #' @param regex_term prefix for col_header.
 
 get_header_index <- function(labels, regex_term = "^col_header") {
-
   current_index_numbers <-
     # Take a vector of header labels.
     labels %>%
     # Extract those that look like automatically generated header names.
     .[stringr::str_detect(., regex_term)] %>%
     # Extract index.
-    stringr::str_extract("\\d")%>%
+    stringr::str_extract("\\d") %>%
     as.numeric()
 
-  if(length(current_index_numbers[!is.na(current_index_numbers)]) == 0 ){
+  if (length(current_index_numbers[!is.na(current_index_numbers)]) == 0) {
     return(1)
-
-  }else{
-
+  } else {
     current_index_numbers %>%
       # Get highest index.
       max(., na.rm = TRUE) %>%
@@ -272,7 +266,6 @@ get_header_index <- function(labels, regex_term = "^col_header") {
       # increment on index.
       `+`(1)
   }
-
 }
 
 
@@ -346,17 +339,18 @@ locatr_example <- function(path = NULL) {
 #' Convert spreadsheet range to a vector of row-col strings.
 #'
 #' This is an internal function that converts a spreadsheet range to a vector of row-col strings.
-#' @param x a string representing a spreadsheet range
+#' @param string a string representing a spreadsheet range
 
-string_to_range <- function(string){
-
+string_to_range <- function(string) {
   limits_df <-
     cellranger::as.cell_limits(string) %>%
     as.data.frame() %>%
-    tidyr::expand_grid(row = c(.$ul[[1]]:.$lr[[1]]),
-                       col = c(.$ul[[2]]:.$lr[[2]]))
+    tidyr::expand_grid(
+      row = c(.$ul[[1]]:.$lr[[1]]),
+      col = c(.$ul[[2]]:.$lr[[2]])
+    )
 
-  range <- paste0(limits_df$row,"-",limits_df$col)
+  range <- paste0(limits_df$row, "-", limits_df$col)
 
   range
 }
@@ -367,18 +361,17 @@ string_to_range <- function(string){
 #' that can be used to create a variable that returns TRUE if row-col
 #' combination is in the range.
 #'
-#' @param x a string expression
+#' @param string_expression a string expression
+#' @param environ an  environment
 
-string_expressions_to_quosures <- function(string_expression,environ){
+string_expressions_to_quosures <- function(string_expression, environ) {
+  symbol_expression %>% map(function(x) {
+    text <- paste0('paste0(row,"-",col) %in% string_to_range("', x[[2]], '")')
 
-  symbol_expression %>% map(function(x){
+    string_quo <- rlang::as_quosure(rlang::parse_expr(text), env = environ)
 
-    text <- paste0('paste0(row,"-",col) %in% string_to_range("',x[[2]],'")')
-
-    string_quo <- rlang::as_quosure(rlang::parse_expr(text),env = environ)
-
-    string_quo }
-  )
+    string_quo
+  })
 }
 
 #' Convert symbol to a filtering quosure
@@ -388,23 +381,23 @@ string_expressions_to_quosures <- function(string_expression,environ){
 #' combination is in the range.
 #'
 #' @param symbol_expression a symbol expression
+#' @param environ an  environment
 
-symbol_expressions_to_quosures <- function(symbol_expression, environ){
 
-  symbol_expression %>% purrr::map(function(x){
+symbol_expressions_to_quosures <- function(symbol_expression, environ) {
+  symbol_expression %>% purrr::map(function(x) {
     function_text <-
-      paste0('purrr::invoke(locatr::',
-             rlang::as_label(x),
-             ', format_id_vec = local_format_id,sheet_format = format)')
+      paste0(
+        "purrr::invoke(locatr::",
+        rlang::as_label(x),
+        ", format_id_vec = local_format_id,sheet_format = format)"
+      )
 
     filter_quosures_symbol <-
-      rlang::as_quosure(rlang::parse_expr(function_text),env = environ)
+      rlang::as_quosure(rlang::parse_expr(function_text), env = environ)
 
     filter_quosures_symbol
   })
-
-
-
 }
 
 #' Give quosure a name
@@ -432,10 +425,10 @@ append_name_to_quosure <- function(x, prefix = "grp_") {
 #'
 #' This is an internal function that adds a prefixed name to a quosure so that variables added to a data frame using this quosure have a predictable name.
 #' @param x a language
+#' @param prefix variable prefix
 
 name_language_expressions <- function(x, prefix) {
-
-  purrr::map_chr(x,function(x){
+  purrr::map_chr(x, function(x) {
     paste0(
       prefix,
       x %>% rlang::as_label() %>% make.names() %>%
@@ -443,8 +436,7 @@ name_language_expressions <- function(x, prefix) {
         stringr::str_replace_all("\\.", "_") %>%
         ifelse(stringr::str_sub(., start = 1, 1) %in% as.character(0:9), paste0("x", .), .)
     )
-  }
-  )
+  })
 }
 
 
@@ -452,21 +444,31 @@ name_language_expressions <- function(x, prefix) {
 #'
 #' This is an internal function that adds a prefixed name to a quosure so that variables added to a data frame using this quosure have a predictable name.
 #' @param x a vector of strings representing spreadsheet ranges
+#' @param prefix variable prefix
 
 
-name_string_expressions <- function(x,prefix){
-  x %>% purrr::map(rlang::get_expr)  %>% unlist() %>%
-    stringr::str_remove("\\:") %>% paste0(prefix,.)
+
+name_string_expressions <- function(x, prefix) {
+  x %>%
+    purrr::map(rlang::get_expr) %>%
+    unlist() %>%
+    stringr::str_remove("\\:") %>%
+    paste0(prefix, .)
 }
 
 
 #' Get name from a vector of symbols
 #'
 #' This is an internal function that adds a prefixed name to a quosure so that variables added to a data frame using this quosure have a predictable name.
-#' @param x a vector of symbols
+#' @param symbols a vector of symbols
+#' @param prefix variable prefix
 
-name_symbol_expressions <- function(symbols,prefix){
-  purrr::map(symbols,rlang::as_label)  %>% unlist() %>%stringr::str_remove("\\:") %>% paste0(prefix,.)
+
+name_symbol_expressions <- function(symbols, prefix) {
+  purrr::map(symbols, rlang::as_label) %>%
+    unlist() %>%
+    stringr::str_remove("\\:") %>%
+    paste0(prefix, .)
 }
 
 
@@ -486,8 +488,8 @@ check_direction_behead <- function(direction_string) {
 check_distinct <- function(cells) {
   if (dplyr::n_distinct(dplyr::select(cells, row, col)) != nrow(cells)) {
     stop("Row and column numbers must be distinct.",
-         "\n  Perhaps you meant to use a single sheet.",
-         call. = FALSE
+      "\n  Perhaps you meant to use a single sheet.",
+      call. = FALSE
     )
   }
 }
@@ -495,10 +497,9 @@ check_distinct <- function(cells) {
 
 # Construct a filter expression for stripping a header from a pivot table
 direction_filter <- function(direction) {
-
   direction <- substr(direction, 1L, 1L)
 
-  if(direction %in% c("u","r","d","l")){
+  if (direction %in% c("u", "r", "d", "l")) {
     return(
       dplyr::case_when(
         direction == "u" ~ rlang::expr(.data$row == min(.data$row)),
@@ -507,19 +508,14 @@ direction_filter <- function(direction) {
         direction == "l" ~ rlang::expr(.data$col == min(.data$col))
       )
     )
-  }else{
-
+  } else {
     dplyr::case_when(
       direction == "N" ~ rlang::expr(.data$row == min(.data$row)),
       direction == "E" ~ rlang::expr(.data$col == max(.data$col)),
       direction == "S" ~ rlang::expr(.data$row == max(.data$row)),
       direction == "W" ~ rlang::expr(.data$col == min(.data$col))
     )
-
   }
-
-
-
 }
 
 # Check that a given direction is a supported compass direction
@@ -607,3 +603,114 @@ concatenate <- function(..., combine_factors = TRUE, fill_factor_na = TRUE) {
   # purrr::flatten(), because it strips classes from dates.
   do.call(c, c(dots, use.names = FALSE))
 }
+
+
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
+
+#' @importFrom methods is
+#' @importFrom utils View installed.packages
+
+# Spurious imports to satisfy R CMD check
+#' @importFrom purrr map
+
+NULL
+
+utils::globalVariables(c(
+  ".",
+  "inner_join",
+  "mutate",
+  "select",
+  "rename",
+  "quo",
+  "UQ",
+  "quo_name",
+  "from_row",
+  "from_col",
+  "to_row",
+  "to_col",
+  "type",
+  "value",
+  "everything",
+  "data_type",
+  "is_na",
+  ".value",
+  ".data_type",
+  "n",
+  ":=",
+  ".partition",
+  "ns_env",
+  "corner_row",
+  "corner_col",
+  ".boundary",
+  ".arrow",
+  ".direction",
+  ".direction.n",
+  ".direction.o",
+  ".header_label",
+  ".header_label.n",
+  ".header_label.o",
+  ".value.n",
+  ".value.o",
+  "address",
+  "address_old",
+  "bottom_border",
+  "col_old",
+  "col_temp",
+  "data",
+  "data_summary",
+  "dc",
+  "default_col_header_direction_temp",
+  "dimension",
+  "direction",
+  "empty_share",
+  "filter_headers_by_temp",
+  "formats",
+  "funs",
+  "h_border_group",
+  "locate_header_groups_if",
+  "max_col",
+  "max_row",
+  "min_col",
+  "min_header_index_temp",
+  "min_row",
+  "row_col",
+  "row_no_name",
+  "row_old",
+  "row_sum_values",
+  "row_temp",
+  "style_format",
+  "tabledata",
+  "v_border_group",
+  "top_border",
+  "local_format_id",
+  "header_label",
+  "is_blank",
+  "label",
+  "key",
+  "character_formatted",
+  "header_label",
+  "is_blank",
+  "left_border",
+  "values",
+  "error",
+  "purrr",
+  "sheet",
+  "rowcol_group",
+  ".rotate",
+  "get_bg_color",
+  "get_h_alignment",
+  "get_indenting",
+  "direction_plot_noninteractive",
+  "direction_plot_interactive",
+  "symbol_expression",
+  "get_text_color",
+  "direction_plot_interactive",
+  "direction_plot_noninteractive",
+  "get_bg_color",
+  "get_h_alignment",
+  "get_indenting",
+  "get_text_color",
+  "symbol_expression"
+))

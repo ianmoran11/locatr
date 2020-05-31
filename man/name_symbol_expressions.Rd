@@ -7,7 +7,9 @@
 name_symbol_expressions(symbols, prefix)
 }
 \arguments{
-\item{x}{a vector of symbols}
+\item{symbols}{a vector of symbols}
+
+\item{prefix}{variable prefix}
 }
 \description{
 This is an internal function that adds a prefixed name to a quosure so that variables added to a data frame using this quosure have a predictable name.

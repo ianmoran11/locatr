@@ -3,7 +3,7 @@
 \name{fmt_font_size}
 \alias{fmt_font_size}
 \title{Add formatting information from the fmt_font_size format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_size formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_font_size(format_id_vec = local_format_id, sheet_formats = formats)
 }
@@ -14,5 +14,5 @@ fmt_font_size(format_id_vec = local_format_id, sheet_formats = formats)
 }
 \description{
 Add formatting information from the fmt_font_size format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_size formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

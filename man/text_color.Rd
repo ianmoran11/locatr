@@ -3,7 +3,7 @@
 \name{text_color}
 \alias{text_color}
 \title{Add formatting information from the text_color format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' text_color formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 text_color(format_id_vec = local_format_id, sheet_format = formats)
 }
@@ -14,5 +14,5 @@ text_color(format_id_vec = local_format_id, sheet_format = formats)
 }
 \description{
 Add formatting information from the text_color format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' text_color formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

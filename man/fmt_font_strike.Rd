@@ -3,7 +3,7 @@
 \name{fmt_font_strike}
 \alias{fmt_font_strike}
 \title{Add formatting information from the fmt_font_strike format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_strike formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_font_strike(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_font_strike(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_font_strike format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_strike formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

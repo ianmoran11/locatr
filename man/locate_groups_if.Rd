@@ -15,49 +15,67 @@ locate_groups_if(sheet = NULL, ..., direction = "N",
 
 \item{...}{filter expression that identifies headers.}
 
-\item{direction}{a string indicating which type of headers are to be labelled. Options include compass direction or up/down/left/right.}
+\item{direction}{a string indicating which type of headers are to be labelled. Options
+include compass direction or up/down/left/right.}
 
-\item{.groupings}{expressions representing how header cells are differentiated. Most naturally works with fmt_* functions.}
+\item{.groupings}{expressions representing how header cells are differentiated.
+Most naturally works with fmt_* functions.}
 
-\item{.hook_if}{expression determining whether directions are hooked. That is, whether a header cell to the left of data cells should be
+\item{.hook_if}{expression determining whether directions are hooked.
+That is, whether a header cell to the left of data cells should be
 annotated as "W" or "WNW". This argument contains an expression within the function \code{hook}.
 This expression must evaluate to a single value for each header group.
-For example, see below that any(fmt_alignment_indent == 0) is used rather that fmt_alignment_indent == 0.}
+For example, see below that any(fmt_alignment_indent == 0)
+is used rather that fmt_alignment_indent == 0.}
 
-\item{.hook_if_rev}{expression determining whether directions are hooked. That is, whether a header cell to the left of data cells should be
+\item{.hook_if_rev}{expression determining whether directions are hooked. That is, whether a
+header cell to the left of data cells should be
 annotated as "W" or "WNW". This argument contains an expression within the function \code{hook}.
 This expression must evaluate to a single value for each header group.
-For example, see below that any(fmt_alignment_indent == 0) is used rather that fmt_alignment_indent == 0.}
+For example, see below that any(fmt_alignment_indent == 0) is used rather that
+fmt_alignment_indent == 0.}
 
-\item{default_col_header_direction}{Indicates which direction is given to col headers by default. Only need if "NNW" is required, rather than "N".}
+\item{default_col_header_direction}{Indicates which direction is given to col headers by default.
 
-\item{default_row_header_direction}{Indicates which direction is given to row headers by default. Only need if "WNW" is required, rather than "W".}
+Only need if "NNW" is required, rather than "N".}
 
-\item{header_fill}{deals with merged cells. Fills in neighbouring cells if they have the same "local_format_id", "style" or are within "borders".}
+\item{default_row_header_direction}{Indicates which direction is given to row headers by default.
+Only need if "WNW" is required, rather than "W".}
+
+\item{header_fill}{deals with merged cells. Fills in neighbouring cells if they have the same
+"local_format_id", "style" or are within "borders".}
 }
 \description{
-This function conditionally adds direction annations to tidyxl data frame, specifying annotions for several headers at once.
-The resulting data frame will contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
-These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by \code{migrate}.
+This function conditionally adds direction annations to tidyxl data frame, specifying
+annotions for several headers at once.
+The resulting data frame will contain the following columns: \code{.value}, \code{.direction},
+and \code{.header_label}.
+These columns indicate the value, direction and name of the header columns that will be
+produced in the tidy data frame produced by \code{migrate}.
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
 # Read in tidyxl data frame
 xl_df <-
   locatr_example("anzsic.xlsx") \%>\%
-   xlsx_cells_fmt(sheets = "Classes") \%>\%
-   filter_fmt(row > 6) # Remove irrelevant rows
+  xlsx_cells_fmt(sheets = "Classes") \%>\%
+  filter_fmt(row > 6) # Remove irrelevant rows
 
 # Identify data cells.
 xl_df <-
   xl_df \%>\%
-   locate_data(col == 6 & is_blank == FALSE)
+  locate_data(col == 6 & is_blank == FALSE)
 
-# Add annotations for header cells that are numbers first, and then for header cells that are words.
- xl_df <-
+# Add annotations for header cells that are numbers first, and then for header cells
+ that are words.
+xl_df <-
   xl_df \%>\%
-   locate_groups_if(str_detect(character,"[0-9]") ,direction = "W", .hook_if = locatr::hook(TRUE)) \%>\%
-   locate_groups_if(str_detect(character,"[a-z]") ,direction = "W", .hook_if = locatr::hook(TRUE))
+  locate_groups_if(str_detect(character, "[0-9]"), direction = "W",
+  .hook_if = locatr::hook(TRUE)) \%>\%
+  locate_groups_if(str_detect(character, "[a-z]"), direction = "W",
+   .hook_if = locatr::hook(TRUE))
+   }
 }

@@ -7,7 +7,7 @@
 string_to_range(string)
 }
 \arguments{
-\item{x}{a string representing a spreadsheet range}
+\item{string}{a string representing a spreadsheet range}
 }
 \description{
 This is an internal function that converts a spreadsheet range to a vector of row-col strings.

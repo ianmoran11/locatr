@@ -3,7 +3,7 @@
 \name{fmt_alignment_wrapText}
 \alias{fmt_alignment_wrapText}
 \title{Add formatting information from the fmt_alignment_wrapText format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' alignment_wrapText formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_alignment_wrapText(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_alignment_wrapText(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_alignment_wrapText format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' alignment_wrapText formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

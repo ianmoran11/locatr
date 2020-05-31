@@ -8,6 +8,8 @@ symbol_expressions_to_quosures(symbol_expression, environ)
 }
 \arguments{
 \item{symbol_expression}{a symbol expression}
+
+\item{environ}{an  environment}
 }
 \description{
 Convert an expression that represents a fmt_ function to a quosure

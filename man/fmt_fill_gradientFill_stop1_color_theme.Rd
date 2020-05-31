@@ -3,7 +3,7 @@
 \name{fmt_fill_gradientFill_stop1_color_theme}
 \alias{fmt_fill_gradientFill_stop1_color_theme}
 \title{Add formatting information from the fmt_fill_gradientFill_stop1_color_theme format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' fill_gradientFill_stop1_color_theme formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_fill_gradientFill_stop1_color_theme(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_fill_gradientFill_stop1_color_theme(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_fill_gradientFill_stop1_color_theme format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' fill_gradientFill_stop1_color_theme formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

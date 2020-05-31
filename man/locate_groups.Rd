@@ -13,51 +13,68 @@ locate_groups(sheet = NULL, direction = "N",
 \arguments{
 \item{sheet}{data frame created by xlsx_cells}
 
-\item{direction}{a string indicating which type of headers are to be labelled. Options include compass direction or up/down/left/right.}
+\item{direction}{a string indicating which type of headers are to be labelled. Options include
+compass direction or up/down/left/right.}
 
-\item{.groupings}{expressions representing how header cells are differentiated. Most naturally works with fmt_* functions.
+\item{.groupings}{expressions representing how header cells are differentiated. Most naturally
+works with fmt_* functions.
 These expressions must be provided within \code{groupings}.}
 
-\item{.hook_if}{expression determining whether directions are hooked. That is, whether a header cell to the left of data cells should be
+\item{.hook_if}{expression determining whether directions are hooked. That is, whether a header
+cell to the left of data cells should be
 annotated as "W" or "WNW". This argument contains an expression within the function \code{hook}.
 This expression must evaluate to a single value for each header group.
-For example, see below that any(fmt_alignment_indent == 0) is used rather that fmt_alignment_indent == 0.}
+For example, see below that any(fmt_alignment_indent == 0)
+is used rather that fmt_alignment_indent == 0.}
 
-\item{.hook_if_rev}{expression determining whether directions are hooked. That is, whether a header cell to the left of data cells should be
+\item{.hook_if_rev}{expression determining whether directions are hooked.
+That is, whether a header cell to the left of data cells should be
 annotated as "W" or "WNW". This argument contains an expression within the function \code{hook}.
 This expression must evaluate to a single value for each header group.
-For example, see below that any(fmt_alignment_indent == 0) is used rather that fmt_alignment_indent == 0.}
+For example, see below that any(fmt_alignment_indent == 0)
+is used rather that fmt_alignment_indent == 0.}
 
-\item{default_col_header_direction}{Indicates which direction is given to col headers by default. Only need if "NNW" is required, rather than "N".}
+\item{default_col_header_direction}{Indicates which direction is given to col headers by default.
+Only need if "NNW" is required, rather than "N".}
 
-\item{default_row_header_direction}{Indicates which direction is given to row headers by default. Only need if "WNW" is required, rather than "W".}
+\item{default_row_header_direction}{Indicates which direction is given to row headers by default.
+Only need if "WNW" is required, rather than "W".}
 
-\item{header_fill}{deals with merged cells. Fills in neighbouring cells if they have the same "local_format_id", "style" or are within "borders".}
+\item{header_fill}{deals with merged cells. Fills in neighbouring cells if they have the same
+"local_format_id", "style" or are within "borders".}
 }
 \description{
-This function adds direction annations to tidyxl data frame, specifying annotions for several headers at once.
-The resulting data frame will contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
-These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by \code{migrate}.
+This function adds direction annations to tidyxl data frame, specifying annotions for
+several headers at once.
+The resulting data frame will contain the following columns: \code{.value}, \code{.direction},
+and \code{.header_label}.
+These columns indicate the value, direction and name of the header columns that will be
+produced in the tidy data frame produced by \code{migrate}.
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
 # Read in tidyxl data frame
 xl_df <-
-locatr_example("worked-examples.xlsx") \%>\%
-xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
-append_fmt(fmt_alignment_indent)
+  locatr_example("worked-examples.xlsx") \%>\%
+  xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
+  append_fmt(fmt_alignment_indent)
 
 # Add location annotations
 xl_df <-
- xl_df \%>\%
+  xl_df \%>\%
   locate_data(data_type == "numeric") \%>\%
-  locate_groups(direction = "W",
-                .groupings = groupings(fmt_alignment_indent),
-                .hook_if =     hook(any(fmt_alignment_indent == 0))) \%>\%
+  locate_groups(
+    direction = "W",
+    .groupings = groupings(fmt_alignment_indent),
+    .hook_if = hook(any(fmt_alignment_indent == 0))
+  ) \%>\%
   locate(direction = "N", name = student)
 
-# Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
- xl_df \%>\% migrate()
+# Use `migrate` to reshape the data frame such that each data cells has its own row and each
+ header variable has its own column.
+xl_df \%>\% migrate()
+}
 }

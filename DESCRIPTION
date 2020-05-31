@@ -25,7 +25,6 @@ Imports:
     tibble (>= 2.1.1),
     cellranger,
     xml2,
-    tidyselect,
     vctrs,
     tidyxl,
     ggplot2,

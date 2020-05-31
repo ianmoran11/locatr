@@ -23,13 +23,17 @@ locate(cells, direction, name, values = NULL, types = data_type,
 \item{drop_na}{drop_na}
 }
 \description{
-This function adds direction annations to tidyxl data frame. The resulting data frame will contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
-These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by \code{migrate}.
+This function adds direction annations to tidyxl data frame. The resulting data frame will
+contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
+These columns indicate the value, direction and name of the header columns that will be
+produced in the tidy data frame produced by \code{migrate}.
 
 The header cells for which annotations are the outermost.
-For example, if "left" of "W" is used for the direction argument, cells furthest to the left in your spreadsheet will have location information added.
+For example, if "left" of "W" is used for the direction argument, cells furthest to the left
+in your spreadsheet will have location information added.
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
@@ -41,7 +45,8 @@ locatr_example("worked-examples.xlsx") \%>\%
 
  xl_df <- xl_df \%>\% locate_data(data_type == "numeric")
 
- # Identify header cells, indicating their direction with respect to the data and a name for their column in the final tidy data frame.
+ # Identify header cells, indicating their direction with respect to the data and a name for
+ their column in the final tidy data frame.
  xl_df <-
   xl_df \%>\%
    locate(direction = "WNW", name = subject_type) \%>\%
@@ -49,7 +54,8 @@ locatr_example("worked-examples.xlsx") \%>\%
    locate(direction = "NNW", name = gender) \%>\%
    locate(direction = "N", name = name)
 
- # Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+ # Use `migrate` to reshape the data frame such that each data cells has its own row and each
+ header variable has its own column.
  xl_df \%>\% migrate()
-
+}
 }

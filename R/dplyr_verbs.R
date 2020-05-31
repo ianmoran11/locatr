@@ -5,7 +5,7 @@
 #' @param fmt_function fmt_* function.
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -20,15 +20,18 @@
 #'  xl_df %>%
 #'   append_fmt(fmt_alignment_indent) %>%
 #'   locate_data(data_type == "numeric")
-#' # Add annotations for header cells. First for header cells to the left of the table with no indenting, and then for cells for one level of indenting.
+#' # Add annotations for header cells. First for header cells to the left of the table with no
+#' indenting, and then for cells for one level of indenting.
 #' xl_df <-
 #'  xl_df %>%
 #'   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) %>%
 #'   locate_if(fmt_alignment_indent == 1, direction = "W", name = subject) %>%
 #'   locate(direction = "N", name = student)
 #'
-#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each
+#' header variable has its own column.
 #'  xl_df %>% migrate()
+#'  }
 
 
 append_fmt_single <- function(cells, fmt_function){
@@ -51,10 +54,11 @@ append_fmt_single <- function(cells, fmt_function){
 #' @description
 #' Add a variable indicating formatting of cells.
 #' @param cells a data frame created by tidyxl::xlsx_cells
-#' @param fmt_function fmt_* function.
+#' @param ... fmt_* function.
+#'
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -69,15 +73,18 @@ append_fmt_single <- function(cells, fmt_function){
 #'  xl_df %>%
 #'   append_fmt(fmt_alignment_indent) %>%
 #'   locate_data(data_type == "numeric")
-#' # Add annotations for header cells. First for header cells to the left of the table with no indenting, and then for cells for one level of indenting.
+#' # Add annotations for header cells. First for header cells to the left of the table with no
+#' indenting, and then for cells for one level of indenting.
 #' xl_df <-
 #'  xl_df %>%
 #'   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) %>%
 #'   locate_if(fmt_alignment_indent == 1, direction = "W", name = subject) %>%
 #'   locate(direction = "N", name = student)
 #'
-#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+#' # Use `migrate` to reshape the data frame such that each data cells has its own row and each
+#' header variable has its own column.
 #'  xl_df %>% migrate()
+#'  }
 
 
 append_fmt <- function(cells, ...){
@@ -112,7 +119,7 @@ append_fmt <- function(cells, ...){
 #' @param ... select input.
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #' library(tidyverse)
 #'
 #'
@@ -129,6 +136,7 @@ append_fmt <- function(cells, ...){
 #'   locate_groups(direction = "N", header_fill = "style")
 #'
 #'  annotated_df %>% plot_cells()
+#'  }
 
 select_fmt <- function(df, ...){
 
@@ -158,6 +166,7 @@ select_fmt <- function(df, ...){
 #' @param ... filter expression.
 #' @export
 #' @examples
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -174,6 +183,7 @@ select_fmt <- function(df, ...){
 #'   locate_groups(direction = "N", header_fill = "style")
 #'
 #'  annotated_df %>% plot_cells()
+#'  }
 
 
 filter_fmt <- function(df, ...){
@@ -206,6 +216,7 @@ filter_fmt <- function(df, ...){
 #' @param ... select input.
 #' @export
 #' @examples
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -222,6 +233,7 @@ filter_fmt <- function(df, ...){
 #'   locate_groups(direction = "N", header_fill = "style")
 #'
 #'  annotated_df %>% plot_cells()
+#'  }
 
 
 mutate_fmt <-  function(df, ...){
@@ -252,6 +264,7 @@ mutate_fmt <-  function(df, ...){
 #' @param ... select input.
 #' @export
 #' @examples
+#' \dontrun{
 #'
 #' library(tidyverse)
 #'
@@ -268,6 +281,7 @@ mutate_fmt <-  function(df, ...){
 #'   locate_groups(direction = "N", header_fill = "style")
 #'
 #'  annotated_df %>% plot_cells()
+#'  }
 
 arrange_fmt <-  function(df, ...){
 

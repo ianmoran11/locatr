@@ -3,7 +3,7 @@
 \name{fmt_fill_patternFill_bgColor_tint}
 \alias{fmt_fill_patternFill_bgColor_tint}
 \title{Add formatting information from the fmt_fill_patternFill_bgColor_tint format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' fill_patternFill_bgColor_tint formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_fill_patternFill_bgColor_tint(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_fill_patternFill_bgColor_tint(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_fill_patternFill_bgColor_tint format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' fill_patternFill_bgColor_tint formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

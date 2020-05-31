@@ -3,7 +3,7 @@
 \name{h_alignment}
 \alias{h_alignment}
 \title{Add formatting information from the h_alignment format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' h_alignment formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 h_alignment(format_id_vec = local_format_id, sheet_format = formats)
 }
@@ -14,5 +14,5 @@ h_alignment(format_id_vec = local_format_id, sheet_format = formats)
 }
 \description{
 Add formatting information from the h_alignment format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' h_alignment formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

@@ -13,19 +13,21 @@ locate_data(sheet = NULL, ...)
 }
 \description{
 This function identifies which cells is a tidyxl dataframe represent data cells.
-It removes data cells from data frame and stores them in an attribute of the resulting tidyxl data frame.
+It removes data cells from data frame and stores them in an attribute of the resulting tidyxl
+data frame.
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
 # Read in tidyxl data frame
- xl_df <- locatr_example("worked-examples.xlsx") \%>\% xlsx_cells_fmt(sheets = "pivot-hierarchy")
+xl_df <- locatr_example("worked-examples.xlsx") \%>\% xlsx_cells_fmt(sheets = "pivot-hierarchy")
 
 # Identify numeric cells as data cells using the data_type column of xl_df
- xl_df <- xl_df \%>\%locate_data(data_type == "numeric")
+xl_df <- xl_df \%>\% locate_data(data_type == "numeric")
 
 # Visually inspect the result
-xl_df \%>\% plot_cells
-
+xl_df \%>\% plot_cells()
+}
 }

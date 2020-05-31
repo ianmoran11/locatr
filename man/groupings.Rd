@@ -10,25 +10,31 @@ groupings(...)
 \item{...}{mutate expression to group headers.}
 }
 \description{
-This functions passes grouping expressions to the .groupings argument of locate_groups. It works most naturally with fmt_* functions.
+This functions passes grouping expressions to the .groupings argument of locate_groups.
+It works most naturally with fmt_* functions.
 }
 \examples{
+\dontrun{
 
 # Read in tidyxl data frame
 xl_df <-
-locatr_example("worked-examples.xlsx") \%>\%
-xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
-append_fmt(fmt_alignment_indent)
+  locatr_example("worked-examples.xlsx") \%>\%
+  xlsx_cells_fmt(sheets = "pivot-hierarchy") \%>\%
+  append_fmt(fmt_alignment_indent)
 
 # Add location annotations
 xl_df <-
- xl_df \%>\%
+  xl_df \%>\%
   locate_data(data_type == "numeric") \%>\%
-  locate_groups(direction = "W",
-                .groupings = groupings(fmt_alignment_indent),
-                .hook_if =     hook(any(fmt_alignment_indent == 0))) \%>\%
+  locate_groups(
+    direction = "W",
+    .groupings = groupings(fmt_alignment_indent),
+    .hook_if = hook(any(fmt_alignment_indent == 0))
+  ) \%>\%
   locate(direction = "N", name = student)
 
-# Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
- xl_df \%>\% migrate()
+# Use `migrate` to reshape the data frame such that each data cells has its own row and
+each header variable has its own column.
+xl_df \%>\% migrate()
+}
 }

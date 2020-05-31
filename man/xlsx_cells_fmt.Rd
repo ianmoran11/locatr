@@ -14,6 +14,3 @@ xlsx_cells_fmt(path, sheets = NA)
 \description{
 This function produces a data frame from excel file, storing formats as an attribute
 }
-\examples{
-print("todo")
-}

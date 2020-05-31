@@ -15,7 +15,7 @@ append_fmt_single(cells, fmt_function)
 Add a variable indicating formatting of cells.
 }
 \examples{
-
+\dontrun{
 
 library(tidyverse)
 
@@ -30,13 +30,16 @@ xl_df <-
  xl_df \%>\%
   append_fmt(fmt_alignment_indent) \%>\%
   locate_data(data_type == "numeric")
-# Add annotations for header cells. First for header cells to the left of the table with no indenting, and then for cells for one level of indenting.
+# Add annotations for header cells. First for header cells to the left of the table with no
+indenting, and then for cells for one level of indenting.
 xl_df <-
  xl_df \%>\%
   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) \%>\%
   locate_if(fmt_alignment_indent == 1, direction = "W", name = subject) \%>\%
   locate(direction = "N", name = student)
 
-# Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+# Use `migrate` to reshape the data frame such that each data cells has its own row and each
+header variable has its own column.
  xl_df \%>\% migrate()
+ }
 }

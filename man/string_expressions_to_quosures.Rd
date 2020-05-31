@@ -7,7 +7,9 @@
 string_expressions_to_quosures(string_expression, environ)
 }
 \arguments{
-\item{x}{a string expression}
+\item{string_expression}{a string expression}
+
+\item{environ}{an  environment}
 }
 \description{
 Convert an expression that represents a spreadsheet range to a quosure

@@ -37,7 +37,7 @@ get_value_references <- function(sheet, manual_value_references) {
     return(ref_df)
   }
 
-  
+
 
   if (rlang::is_formula(manual_value_references)) {
     current_quosure <- rlang::as_quosure(manual_value_references)

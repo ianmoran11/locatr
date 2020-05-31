@@ -3,7 +3,7 @@
 \name{fmt_font_vertAlign}
 \alias{fmt_font_vertAlign}
 \title{Add formatting information from the fmt_font_vertAlign format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_vertAlign formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_font_vertAlign(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_font_vertAlign(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_font_vertAlign format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' font_vertAlign formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

@@ -3,7 +3,7 @@
 \name{fmt_border_end_color_indexed}
 \alias{fmt_border_end_color_indexed}
 \title{Add formatting information from the fmt_border_end_color_indexed format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' border_end_color_indexed formatting.}
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``}
 \usage{
 fmt_border_end_color_indexed(format_id_vec = local_format_id,
   sheet_formats = formats)
@@ -15,5 +15,5 @@ fmt_border_end_color_indexed(format_id_vec = local_format_id,
 }
 \description{
 Add formatting information from the fmt_border_end_color_indexed format object
-This function uses the format object created by \code{xlsx_formats} along with `local_format_id`` to create a vector representing cells' border_end_color_indexed formatting.
+This function uses the format object created by \code{xlsx_formats} along with `local_format_id``
 }

@@ -25,15 +25,19 @@ locate_if(cells, ..., direction, name, values = NULL,
 \item{drop_na}{drop_na}
 }
 \description{
-This function conditionally adds direction annations to tidyxl data frame. The resulting data frame will contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
-These columns indicate the value, direction and name of the header columns that will be produced in the tidy data frame produced by \code{migrate}.
+This function conditionally adds direction annations to tidyxl data frame. The resulting data
+frame will contain the following columns: \code{.value}, \code{.direction}, and \code{.header_label}.
+These columns indicate the value, direction and name of the header columns that will be produced
+in the tidy data frame produced by \code{migrate}.
 
 The header cells for which annotations are the outermost.
-For example, if "left" of "W" is used for the direction argument, cells furthest to the left in your spreadsheet will have location information added.
+For example, if "left" of "W" is used for the direction argument, cells furthest to the left in
+your spreadsheet will have location information added.
 
 The \code{...} arguments take explressions that identify which cells we have annotations added.
 }
 \examples{
+\dontrun{
 
 library(tidyverse)
 
@@ -50,13 +54,16 @@ xl_df <-
   locate_data(data_type == "numeric")
 
 
-# Add annotations for header cells. First for header cells to the left of the table with no indenting, and then for cells for one level of indenting.
+# Add annotations for header cells. First for header cells to the left of the table with no
+indenting, and then for cells for one level of indenting.
 xl_df <-
  xl_df \%>\%
   locate_if(fmt_alignment_indent == 0, direction = "WNW", name = subject_type) \%>\%
   locate_if(fmt_alignment_indent == 1, direction = "W", name = subject) \%>\%
   locate(direction = "N", name = student)
 
-# Use `migrate` to reshape the data frame such that each data cells has its own row and each header variable has its own column.
+# Use `migrate` to reshape the data frame such that each data cells has its own row and each
+header variable has its own column.
  xl_df \%>\% migrate()
+ }
 }
