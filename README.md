@@ -6,7 +6,7 @@
 Overview
 --------
 
-The `locatr` package An extension to unpivotr enabling a declarative approach to converting data from complex or irregular layouts to a columnar structure.
+The `locatr` package makes tidying data from spreadsheets easier. It helps identify and classify table cells, and then visually inspect them. .
 
 Installation
 ------------
