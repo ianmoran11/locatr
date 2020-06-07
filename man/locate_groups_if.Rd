@@ -6,7 +6,7 @@
 \usage{
 locate_groups_if(sheet = NULL, ..., direction = "N",
   .groupings = groupings(fmt_alignment_indent),
-  .hook_if = hook(any(FALSE)), .hook_if_rev = hook(any(FALSE)),
+  .hook_if = hook_if(any(FALSE)), .hook_if_rev = hook_if(any(FALSE)),
   default_col_header_direction = "N",
   default_row_header_direction = "W", header_fill = "local_format_id")
 }
@@ -74,8 +74,8 @@ xl_df <-
 xl_df <-
   xl_df \%>\%
   locate_groups_if(str_detect(character, "[0-9]"), direction = "W",
-  .hook_if = locatr::hook(TRUE)) \%>\%
+  .hook_if = locatr::hook_if(TRUE)) \%>\%
   locate_groups_if(str_detect(character, "[a-z]"), direction = "W",
-   .hook_if = locatr::hook(TRUE))
+   .hook_if = locatr::hook_if(TRUE))
    }
 }

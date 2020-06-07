@@ -5,8 +5,8 @@
 \title{Get column groups}
 \usage{
 get_header_groups(sheet, direction, value_ref, formats,
-  .groupings = groupings(ones), .hook_if = hook(ones),
-  .hook_if_rev = hook(ones), header_fill = "local_format_id",
+  .groupings = groupings(ones), .hook_if = hook_if(ones),
+  .hook_if_rev = hook_if(ones), header_fill = "local_format_id",
   default_col_header_direction = default_col_header_direction_temp,
   table_data = tabledata, min_header_index = min_header_index_temp)
 }

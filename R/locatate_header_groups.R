@@ -51,7 +51,7 @@
 #'   locate_groups(
 #'     direction = "W",
 #'     .groupings = groupings(fmt_alignment_indent),
-#'     .hook_if = hook(any(fmt_alignment_indent == 0))
+#'     .hook_if = hook_if(any(fmt_alignment_indent == 0))
 #'   ) %>%
 #'   locate(direction = "N", name = student)
 #'
@@ -61,7 +61,7 @@
 #' }
 locate_groups <-
   function(sheet = NULL, direction = "N", .groupings = groupings(fmt_alignment_indent),
-           .hook_if = hook(any(FALSE)), .hook_if_rev = hook(any(FALSE)),
+           .hook_if = hook_if(any(FALSE)), .hook_if_rev = hook_if(any(FALSE)),
            default_col_header_direction = "N", default_row_header_direction = "W", header_fill = "local_format_id") {
     sheet_temp <- sheet
     direction_temp <- direction
@@ -139,13 +139,13 @@ locate_groups <-
 #' xl_df <-
 #'   xl_df %>%
 #'   locate_groups_if(str_detect(character, "[0-9]"), direction = "W",
-#'   .hook_if = locatr::hook(TRUE)) %>%
+#'   .hook_if = locatr::hook_if(TRUE)) %>%
 #'   locate_groups_if(str_detect(character, "[a-z]"), direction = "W",
-#'    .hook_if = locatr::hook(TRUE))
+#'    .hook_if = locatr::hook_if(TRUE))
 #'    }
 locate_groups_if <-
   function(sheet = NULL, ..., direction = "N", .groupings = groupings(fmt_alignment_indent),
-           .hook_if = hook(any(FALSE)), .hook_if_rev = hook(any(FALSE)),
+           .hook_if = hook_if(any(FALSE)), .hook_if_rev = hook_if(any(FALSE)),
            default_col_header_direction = "N", default_row_header_direction = "W",
            header_fill = "local_format_id") {
 
@@ -242,6 +242,8 @@ locate_groups_if <-
     sheet
   }
 
+
+
 #' Supply an expression to identify which header groups are hooked.
 #'
 #' @description
@@ -258,7 +260,6 @@ locate_groups_if <-
 #'
 #' @param ...  expression applied to a  identifies which header groups are hooked
 #'
-#' @name get_range_dfs
 #' @export
 #' @examples
 #' \dontrun{
@@ -279,7 +280,7 @@ locate_groups_if <-
 #'   locate_groups(
 #'     direction = "W",
 #'     .groupings = groupings(fmt_alignment_indent),
-#'     .hook_if = hook(any(fmt_alignment_indent == 0))
+#'     .hook_if = hook_if(any(fmt_alignment_indent == 0))
 #'   ) %>%
 #'   locate(direction = "N", name = student)
 #'
@@ -288,6 +289,7 @@ locate_groups_if <-
 #' xl_df %>% migrate()
 #' }
 hook <- function(...) {
+  warning("`hook` is deprecated. Please use `hook_if` instead.")
   rlang::quos(...)
 }
 
@@ -314,7 +316,7 @@ hook <- function(...) {
 #'   locate_groups(
 #'     direction = "W",
 #'     .groupings = groupings(fmt_alignment_indent),
-#'     .hook_if = hook(any(fmt_alignment_indent == 0))
+#'     .hook_if = hook_if(any(fmt_alignment_indent == 0))
 #'   ) %>%
 #'   locate(direction = "N", name = student)
 #'

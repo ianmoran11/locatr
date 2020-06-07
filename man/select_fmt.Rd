@@ -28,7 +28,7 @@ locatr_example("newresconst.xlsx") \%>\%
   locate_data(data_type == "numeric" & col > 1) \%>\%
   locate_groups(direction = "W",
                 .groupings = groupings(is.na(numeric)),
-                .hook_if = hook(any(data_type == "numeric"))) \%>\%
+                .hook_if = hook_if(any(data_type == "numeric"))) \%>\%
   locate_groups(direction = "N", header_fill = "style")
 
  annotated_df \%>\% plot_cells()

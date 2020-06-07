@@ -112,7 +112,7 @@ locatr_example("worked-examples.xlsx") %>%
   locate_data(data_type == "numeric") %>%
   locate_groups(direction = "W",
                 .groupings = groupings(fmt_alignment_indent),
-                .hook_if =     hook(any(fmt_alignment_indent == 0))) %>%
+                .hook_if =     hook_if(any(fmt_alignment_indent == 0))) %>%
   locate(direction = "N", name = student) %>% 
   plot_cells()
 ```
@@ -142,7 +142,7 @@ annotated_df <-
   locate_data(data_type == "numeric" & col > 1) %>%
   locate_groups(direction = "W", 
                 .groupings = groupings(is.na(numeric)), 
-                .hook_if = hook(any(data_type == "numeric"))) %>% 
+                .hook_if = hook_if(any(data_type == "numeric"))) %>% 
   locate_groups(direction = "N", header_fill = "style")  
 
 annotated_df %>% plot_cells()

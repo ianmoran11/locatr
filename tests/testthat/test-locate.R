@@ -35,7 +35,7 @@ test_that("locate_groups() works", {
     locate_groups(
       direction = "W",
       .groupings = groupings(fmt_alignment_indent),
-      .hook_if = hook(any(fmt_alignment_indent == 0))
+      .hook_if = hook_if(any(fmt_alignment_indent == 0))
     ) %>%
     locate(direction = "N", name = student) %>%
     dplyr::select(-character_formatted)

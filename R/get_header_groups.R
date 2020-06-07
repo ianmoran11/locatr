@@ -26,8 +26,8 @@
 
 get_header_groups <- function(sheet, direction, value_ref, formats,
                               .groupings = groupings(ones),
-                              .hook_if = hook(ones),
-                              .hook_if_rev = hook(ones),
+                              .hook_if = hook_if(ones),
+                              .hook_if_rev = hook_if(ones),
                               header_fill = "local_format_id",
                               default_col_header_direction = default_col_header_direction_temp,
                               table_data = tabledata,

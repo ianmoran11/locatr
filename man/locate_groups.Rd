@@ -6,7 +6,7 @@
 \usage{
 locate_groups(sheet = NULL, direction = "N",
   .groupings = groupings(fmt_alignment_indent),
-  .hook_if = hook(any(FALSE)), .hook_if_rev = hook(any(FALSE)),
+  .hook_if = hook_if(any(FALSE)), .hook_if_rev = hook_if(any(FALSE)),
   default_col_header_direction = "N",
   default_row_header_direction = "W", header_fill = "local_format_id")
 }
@@ -69,7 +69,7 @@ xl_df <-
   locate_groups(
     direction = "W",
     .groupings = groupings(fmt_alignment_indent),
-    .hook_if = hook(any(fmt_alignment_indent == 0))
+    .hook_if = hook_if(any(fmt_alignment_indent == 0))
   ) \%>\%
   locate(direction = "N", name = student)
 
