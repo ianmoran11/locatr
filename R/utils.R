@@ -335,6 +335,13 @@ locatr_example <- function(path = NULL) {
 #' @format a dataframe
 "migrate_test"
 
+#' Data frame used for testing fmt_* functions
+#'
+#' Data frame used for testing fmt_* functions
+#'
+#' @format a dataframe
+"fmt_functions_test"
+
 
 #' Convert spreadsheet range to a vector of row-col strings.
 #'
@@ -712,5 +719,6 @@ utils::globalVariables(c(
   "get_h_alignment",
   "get_indenting",
   "get_text_color",
-  "symbol_expression"
+  "symbol_expression",
+  "fmt_functions_test"
 ))
