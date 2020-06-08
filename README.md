@@ -1,5 +1,6 @@
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/ianmoran11/locatr.svg?branch=master)](https://travis-ci.org/ianmoran11/locatr)
+[![Codecov test coverage](https://codecov.io/gh/ianmoran11/locatr/branch/master/graph/badge.svg)](https://codecov.io/gh/ianmoran11/locatr?branch=master)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

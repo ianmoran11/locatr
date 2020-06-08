@@ -19,7 +19,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 # Load all packages 
-library(here)
 library(dplyr)
 library(stringr)
 library(locatr)
