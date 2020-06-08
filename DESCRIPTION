@@ -1,12 +1,12 @@
 Package: locatr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Easier Tidying of Data from Spreadsheets
 Version: 0.1.0
 Authors@R: c(
     person("Ian", "Moran", email = "ian.moran11@gmail.com", role = c("aut","cre")),
     person("Duncan", "Garmonsway", email = "nacnudus@gmail.com", role = c("ctb"))
     )
-Description: locatr is an extension to unpivotr. It makes it easier to identify, classify and reshape cells in a spreadsheet table. Its key functions enable users to visualize spreadsheet tables and classify table cells in a declarative manner.  
+Description: This package is an extension to unpivotr. It makes it easier to identify, classify and reshape cells in a spreadsheet table. Its key functions enable users to visualize spreadsheet tables and classify table cells in a declarative manner.  
 Depends:
     R (>= 3.2.0)
 License: MIT + file LICENSE
@@ -24,7 +24,7 @@ Imports:
     tibble (>= 2.1.1),
     cellranger,
     xml2,
-    vctrs,
+    vctrs (>= 0.3.0),
     tidyxl,
     ggplot2,
     tidyr,
