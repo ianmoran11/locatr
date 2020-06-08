@@ -6,8 +6,7 @@ Authors@R: c(
     person("Ian", "Moran", email = "ian.moran11@gmail.com", role = c("aut","cre")),
     person("Duncan", "Garmonsway", email = "nacnudus@gmail.com", role = c("ctb"))
     )
-Description: An extension to unpivotr enabling a declarative approach to  converting data from complex or irregular layouts to a
-    columnar structure. 
+Description: locatr is an extension to unpivotr. It makes it easier to identify, classify and reshape cells in a spreadsheet table. Its key functions enable users to visualize spreadsheet tables and classify table cells in a declarative manner.  
 Depends:
     R (>= 3.2.0)
 License: MIT + file LICENSE

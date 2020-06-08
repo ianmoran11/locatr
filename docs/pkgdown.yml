@@ -1,0 +1,7 @@
+pandoc: 1.19.2.1
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles:
+  locate-workflow: locate-workflow.html
+last_built: 2020-06-08T01:04Z
+
